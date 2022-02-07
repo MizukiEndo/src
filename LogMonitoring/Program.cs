@@ -56,8 +56,8 @@ namespace LogMonitoring
 					break;
 				case "2":
 					Console.WriteLine("故障とみなすタイムアウト回数を指定してください。");
-					string val = Console.ReadLine();
-					if (int.TryParse(val, out int timeoutCnt))
+					string valTimeoutCnt = Console.ReadLine();
+					if (int.TryParse(valTimeoutCnt, out int timeoutCnt) && timeoutCnt > 0)
 					{
 						Question2.Answer(timeoutCnt);
 					}
@@ -69,10 +69,10 @@ namespace LogMonitoring
 					break;
 				case "3":
 					Console.WriteLine("応答時間の平均値を算出するログ数をしてしてください。");
-					string val1 = Console.ReadLine();
+					string valTargetCnt = Console.ReadLine();
 					Console.WriteLine("負荷とみなさない応答時間の上限値を指定してください。");
-					string val2 = Console.ReadLine();
-					if (int.TryParse(val1, out int targetCnt) && int.TryParse(val2, out int responseBorder) && targetCnt > 0)
+					string valResponseBorder = Console.ReadLine();
+					if (int.TryParse(valTargetCnt, out int targetCnt) && int.TryParse(valResponseBorder, out int responseBorder) && targetCnt > 0)
 					{
 						Question3.Answer(targetCnt, responseBorder);
 					}
@@ -83,6 +83,16 @@ namespace LogMonitoring
 					ShowMenu();
 					break;
 				case "4":
+					Console.WriteLine("ネットワーク故障とみなすタイムアウト回数を指定してください。");
+					string valNetworkTimeoutCnt = Console.ReadLine();
+					if (int.TryParse(valNetworkTimeoutCnt, out int networkTimeoutCnt) && networkTimeoutCnt > 0)
+					{
+						Question4.Answer(networkTimeoutCnt);
+					}
+					else
+					{
+						Console.WriteLine("入力値が無効です。");
+					}
 					ShowMenu();
 					break;
 				case "0":
