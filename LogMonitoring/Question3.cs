@@ -42,6 +42,7 @@ namespace LogMonitoring
 		/// <param name="vResponseBorder">平均応答時間の許容下限値</param>
 		public static void Answer(int vTargetCnt, int vResponseBorder)
 		{
+			bool isDataExists = false;
 			//サーバー毎のデータリスト
 			List<ServerData> serverList = new List<ServerData>();
 			using (StreamReader sr = new StreamReader(Util.TargetLogFileFullPath))
@@ -102,8 +103,13 @@ namespace LogMonitoring
 						sb.Append(dtInfo.From + "～" + dtInfo.To);
 						sb.Append($"({dtInfo.Diff:%d}日{dtInfo.Diff:%h}時間{dtInfo.Diff:%m}分{dtInfo.Diff:%s}秒 平均応答時間:{ave.ToString()}秒)");
 						Console.WriteLine(sb.ToString());
+						isDataExists = true;
 					}
 				}
+			}
+			if (!isDataExists)
+			{
+				Console.WriteLine("該当データはありませんでした。");
 			}
 		}
 

@@ -23,6 +23,7 @@ namespace LogMonitoring
 		public static void Answer(int vTimeoutCnt)
 		{
 			const int ColsTimeoutCont = 3;
+			bool isDataExists = false;
 			List<List<string>> timeoutList = new List<List<string>>();
 			using (StreamReader sr = new StreamReader(Util.TargetLogFileFullPath))
 			{
@@ -60,6 +61,7 @@ namespace LogMonitoring
 							sb.Append(dtInfo.From + "～" + dtInfo.To);
 							sb.Append($"({dtInfo.Diff:%d}日{dtInfo.Diff:%h}時間{dtInfo.Diff:%m}分{dtInfo.Diff:%s}秒 {timeoutList[index][ColsTimeoutCont]}回)");
 							Console.WriteLine(sb.ToString());
+							isDataExists = true;
 						}
 						//タイムアウトリストから削除する
 						timeoutList.RemoveAt(index);
@@ -77,8 +79,13 @@ namespace LogMonitoring
 						sb.Append(dtInfo.From + "～" + dtInfo.To);
 						sb.Append($"({dtInfo.Diff:%d}日{dtInfo.Diff:%h}時間{dtInfo.Diff:%m}分{dtInfo.Diff:%s}秒)");
 						Console.WriteLine(sb.ToString());
+						isDataExists = true;
 					}
 				}
+			}
+			if (!isDataExists)
+			{
+				Console.WriteLine("該当データはありませんでした。");
 			}
 		}
 

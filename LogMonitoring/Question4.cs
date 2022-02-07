@@ -73,6 +73,7 @@ namespace LogMonitoring
 		/// <param name="vResponseBorder">平均応答時間の許容下限値</param>
 		public static void Answer(int vTargetCnt)
 		{
+			bool isDataExists = false;
 			SubnetList = new List<SubnetData>();
 
 			//サブネット毎のデータリストを作成
@@ -123,6 +124,7 @@ namespace LogMonitoring
 									sb.Append(dtInfo.From + "～" + dtInfo.To);
 									sb.Append($"({dtInfo.Diff:%d}日{dtInfo.Diff:%h}時間{dtInfo.Diff:%m}分{dtInfo.Diff:%s}秒 {timeoutCnt.ToString()}回)");
 									Console.WriteLine(sb.ToString());
+									isDataExists = true;
 								}
 								isTimeout = false;
 								timeoutCnt = 0;
@@ -159,7 +161,12 @@ namespace LogMonitoring
 					sb.Append(dtInfo.From + "～" + dtInfo.To);
 					sb.Append($"({dtInfo.Diff:%d}日{dtInfo.Diff:%h}時間{dtInfo.Diff:%m}分{dtInfo.Diff:%s}秒 {timeoutCnt.ToString()}回)");
 					Console.WriteLine(sb.ToString());
+					isDataExists = true;
 				}
+			}
+			if (!isDataExists)
+			{
+				Console.WriteLine("該当データはありませんでした。");
 			}
 		}
 
