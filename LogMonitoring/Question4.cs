@@ -99,7 +99,7 @@ namespace LogMonitoring
 					bool isSkip = false;
 					foreach (ServerData serverData in subnetData.ServerList)
 					{
-						if (serverData.LogList.Count < i)
+						if (serverData.LogList.Count - 1 < i)
 						{
 							//インデックスエラー回避
 							continue;
@@ -152,8 +152,8 @@ namespace LogMonitoring
 					}
 				}
 
-				//応答がないままのネットワークは現在日時まで応答なしとみなす
-				if (isTimeout)
+				//応答がないままのネットワークで既定回数を超えている場合、は現在日時まで応答なしとみなす
+				if (isTimeout && timeoutCnt >= vTargetCnt)
 				{
 					Util.CalcDatetimeDiff dtInfo = new Util.CalcDatetimeDiff(timeoutStartDt);
 					StringBuilder sb = new StringBuilder();
