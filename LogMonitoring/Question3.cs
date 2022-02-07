@@ -101,7 +101,7 @@ namespace LogMonitoring
 						StringBuilder sb = new StringBuilder();
 						sb.Append(values[Util.Cols.ServerAddress] + " ");
 						sb.Append(dtInfo.From + "～" + dtInfo.To);
-						sb.Append($"({dtInfo.Diff:%d}日{dtInfo.Diff:%h}時間{dtInfo.Diff:%m}分{dtInfo.Diff:%s}秒 平均応答時間:{ave.ToString()}秒)");
+						sb.Append($"({dtInfo.Diff:%d}日{dtInfo.Diff:%h}時間{dtInfo.Diff:%m}分{dtInfo.Diff:%s}秒 平均応答時間:{ave.ToString()}ミリ秒)");
 						Console.WriteLine(sb.ToString());
 						isDataExists = true;
 					}
